@@ -11,6 +11,15 @@
 **Tools:** ffuf, Nmap, Wireshark, Apache, Linux  
 **Focus:** Service discovery, stealth vs noisy scanning, traffic analysis
 
+## Why This Matters
+
+This project demonstrates the ability to:
+- Identify hidden web endpoints through targeted fuzzing
+- Enumerate exposed network services using multiple Nmap scan techniques
+- Analyze reconnaissance activity at the packet level using Wireshark
+- Correlate scan behavior with application and service logs
+- Use offensive reconnaissance techniques to assess detection, logging behaviour, and exposed attack surface from a defensive perspective
+
 ### Week 2: Sniff-n-Scan
 ====================================================================================
 
