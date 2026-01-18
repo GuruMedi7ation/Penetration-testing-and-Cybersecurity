@@ -47,14 +47,14 @@ Hoikkala “joohoi” 2020,  Still Fuzzing Faster (U fool)
 
 Let's get down to business! I don't know if we're going to fuzz fast today, but at least we got the target up and running.
 
-![](fuzz_target.png)
+![](media/fuzz_target.png)
 
 Kali Linux has ffuf pre-installed, so let's proceed to download a wordlist. Joohoi and Karvinen recommended Seclists.
 You can also build your own wordlist if you want, and you can add mutations to your wordlist with Python. Some tools
 like Hashcat and John the ripper can be also used to create powerful, mutated wordlists.
 
 
-![](fuzz_1.png)
+![](media/fuzz_1.png)
 
 That's a lot of hits and that was fast! Let's take a quick look at some HTTP status codes for reference.
 
@@ -87,23 +87,23 @@ and see what we've got after that. Below is the result after a second run.
 ffuf -w common.txt -u http://127.0.0.2:8000/FUZZ -fs 154| less
 '''
 
-![](fs_154_hits.png)
+![](media/fs_154_hits.png)
 
 That narrowed down our hits a lot! We have so few remaining hits that we can use our own little hands and try these out manually.
 Also the hits look really interesting, like wp-admin and .git/HEAD +everything else.
 
-![](found_it.png)
+![](media/found_it.png)
 
 GOOOOAL! We found the flag! This would have been an admin portal. In a live environment this would be a prime target
 for some more shenanigans. You could try some SQL injections, for example, if someone has forgot to implement filtering/sanitizing
 the inputs that go to the DB behind the admin portal.
 
-![](sus_git.png)
+![](media/sus_git.png)
 
 The .git hit is also extremely SUS. We have a 301 HTTP status code, so it's moved permanently.. But where's the header! I'm fumbling
 my way around dev tools for a while.. 
 
-![](ei_vittu.png)
+![](media/ei_vittu.png)
 
 URGH! Our fuzzing hit clearly reads as follows: .git
 I wasted an awful lot of time because I did not include the . in the URL. This is a little bit embarrassing, and a sign that it's a
@@ -150,7 +150,7 @@ Logging connections with a firewall is also a thing!
 
 ### A little bit more about specific scanning modes:
 
-Nmap -sS
+### Nmap -sS
 
 This is a half-open scan. In this mode we will send a SYN request to our target. If our target responds with SYN-ACK, we know
 the port is open and there is a service running behind the port. Our scan will respond with a RST, leaving our target with an open port
@@ -184,13 +184,13 @@ SOURCES: Lyon 2009: Nmap Network Scanning, Man-pages for Nmap
 
 ### C)  TCP connect scan
 
-![](tcp_scan_1.png)
+![](media/tcp_scan_1.png)
 
 I perform a TCP connect scan on our target @localhost, where I discover a SSH service running on default port 22.
 
 Next, let's take a look at how our TCP scan looks using Wireshark. I used a filter to show results traffic at TCP port 22.
 
-![](tcp_scan_2.png)
+![](media/tcp_scan_2.png)
 
 As we can see, I sent a SYN-request from an ephemereal port 43442 at our target machine running on local host port 22.
 Target responds with SYN,ACK - this confirms there's a service running. Because we're using a TCP scan that forms a connection with the target machine,
@@ -201,7 +201,7 @@ Notice how we initiate a handshake with SYN on each port and get RST, ACK reply 
 the target is reachable, and there is no firewall protecting the target.
 
 
-![](tcp_scan_3.png)
+![](media/tcp_scan_3.png)
 
 
 ** D) TCP SYN scan**
@@ -213,16 +213,16 @@ with a blunt RST to terminate the handshake. Below are the results, showing that
 since we got a RST reply to our initial SYN. Apparently our attacking machine is not running a DNS service, which is true! 
 Nmap also informs us that there's a loopback ipv6 address on our target machine which was not scanned.
 
-![](syn_scan_1.png) 
+![](media/syn_scan_1.png) 
 
 This is how it looked liked in Wireshark.
 
-![](syn_scan_2.png)
+![](media/syn_scan_2.png)
 
 
 ** E) ICMP ping scan**
 
-![](ping_scan.png)
+![](media/ping_scan.png)
 
 Let's move on to ICMP scan, which means we're trying to just discover if there's a machine running on our target.
 ICMP messages are often ping requests ( ICMP echo and reply ) and ICMP timestamps. -edit: nmap -sn also sends ARP requests
@@ -230,7 +230,7 @@ when we're running this locally!
 
 Surprise, there's a live host on our target! What surprised me more is that we saw absolutely nothing in Wireshark. Talk about stealth!
 
-![](ping_scan_2.png)
+![](media/ping_scan_2.png)
 
 -edit: In retrospect I think this was most likely because we were filtering TCP protocol only because we used it in previous tasks.
 
@@ -239,7 +239,7 @@ run nmap -sn again at our target machine. We're now seeing traffic in Wireshark 
 
 -late edit: I was surprised to discover the nmap also sends TCP requests when running an ICMP scan.
 
-![](ping_scan_3.png)
+![](media/ping_scan_3.png)
 
 
 ** F) Nmap -pN ( No ping )**
@@ -249,7 +249,7 @@ It is common that ICMP traffic is blocked, so -pN is often mandatory to get any 
 
 Tjahas…
 
-![](https://pentesttest9.wordpress.com/wp-content/uploads/2023/11/dont_ping.png?w=537)
+![](media/dont_ping.png)
 
 I wonder what this was about..
 
@@ -259,7 +259,7 @@ I wonder what this was about..
 
 Let's try version discovery! I targeted the previously discovered open TCP port 22 that has a SSH service running on it.
 
-![](version_scan.png)
+![](media/version_scan.png)
 
 Nmap -sV identifies the SSH service beautifully! It is OpenSSH 9.3p2 for Debian
 
@@ -267,7 +267,7 @@ Nmap also correctly identifies target OS as Linux, and considering previous vers
 
 We saw the following in Wireshark
 
-![](version_scan_2.png)
+![](media/version_scan_2.png)
 
 The scan started with a SYN request, the target replied with SYN,ACK, to which we replied with RST to terminate the handshake.
 This was possibly done to initially verify there's a live service running on our target machine.
@@ -281,17 +281,17 @@ with FIN,ACK messages being exchanged.
 
 Next we're running nmap and directing the output to a log file of our choosing.
 
-![](foo_1.png)
+![](media/foo_1.png)
 
 Great, we got three different versions of our output. Let's take a closer look.
 
-![](foo_2.png)
+![](media/foo_2.png)
 
 The first output foo.gnmap is a nice and short summary, very greppable form and human readable. Useful when there are a large number of hits.
 
 The second  output foo.nmap is the regular, full report. Useful for more a more granular look.
 
-![](foo_3.png)
+![](media/foo_3.png)
 
 The third output is foo.xml. This one is very handy for robots, which is nice if you want to automate analyzing your results.
 
@@ -304,42 +304,42 @@ Let's take a look at a few options.
 Shift V or v: Decrease tai increase the level of verbosity. Let's try this with a little bit more time-consuming scan and try how it looks.
 Let's perform an aggressive UDP scan of all ports with OS and Version detection, traceroute and script scanning enabled. 
 
-![](verbosity.png)
+![](media/verbosity.png)
 
 Heh, 2.35 seconds was not much time to observe the effects, but we did manage to get a very slimmed down report.
 
 
 Packet tracing: Let's try a TCP NULL Scan with packet tracing enabled. This is a poverty sniffer mode.
 
-![](packet_trace.png)
+![](media/packet_trace.png)
 
 **J) Way of the samurai: Scanning a live Apache server**
 
 Let's try an aggressive scan targeting TCP port 80. I want to be intentionally noisy. I set up an Apache server on our target machine for this.
 
-![](apachescan.png)
+![](media/apachescan.png)
 
 As we can see, we have Apache 2 up and live on our target serving the default "it works"-page.
 Nmap also identified Apache version 2.4.57 running on Debian.
 
 Let's take a look how our GET request and HTTP traffic looks like in Wireshark.
 
-![](http_scan.png)
+![](media/http_scan.png)
 
 
 Below is a more detailed look at our captured booty. You can get a lot of detailed information out of Wireshark,
 as we're capturing and recording the full traffic and we're looking at unencrypted HTTP instead of HTTPS.
 
-![](saalis.png)
+![](media/saalis.png)
 
 Let's take a look at how Apache logs look like. It has successfully recognized a lot of events involving Nmap scripts.
 We could mitigate the scanning attempt by automating source IP banning. 
 
-![](apache_log.png)
+![](media/apache_log.png)
 
 Let's try version detection next with nmap -sV
 
-![](nmap_sv.png)
+![](media/nmap_sv.png)
 
 There's a lot less stuff on our Apache logs this time. We can see HTTP GET request being successfully served with code 200 OK.
 We can also see Apache still recognize some nmap scripts. Version detection is noisy!
@@ -348,7 +348,7 @@ Next, I want to try if I can scan TCP port 80 like a true ninja. Let's start wit
 TCP SYN scan.
 
 
-![](stealth_apache.png)
+![](media/stealth_apache.png)
 
 As we can see, TCP SYN scan recognized the open port serving HTTP, but Apache log file is empty! Great success.
 It's to be noted that it is unlikely the previous would work as smoothly in a modern environment, IDS/NIPS will flag
@@ -356,20 +356,20 @@ and ban your IP unless you go extra stealthy and spread your scan over a long du
 
 Our scan looked like this in Wireshark. SYN -> SYN,ACK -> RST to terminate the handshake before it completes.
 
-![](syn_wireshark.png)
+![](media/syn_wireshark.png)
 
 **K) UDP-scan: Destination unknown**
 
 Let's run a UDP scan on all ports.
 
-![](udp_scan.png)
+![](media/udp_scan.png)
 
-![](udp_wireshark.png)
+![](media/udp_wireshark.png)
 
 UDP is connectionless, so everything is working as intended even though we're not getting replies to our packets. This can make it
 difficult to determine if a port is open or closed, since you can get a lot of false positives or negatives.
 
-![](nmap_udp_p.png)
+![](media/nmap_udp_p.png)
 
 I performed packet tracing on nmap, 1 host is discovered but all the UDP ports are closed. We're also seeing a lot of ICMP Port unreachable
 replies. 
