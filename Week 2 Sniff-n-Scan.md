@@ -10,7 +10,7 @@ Week 2: Sniff-n-Scan
 ====================
 
 The theme of this week is reconnaissance. We will continue our port scanning journey,
-and we will capture and analyze the resulting traffic. We will also learn how to to discover
+and we will capture and analyze the resulting traffic. We will also learn how to discover
 points of interest using a technique called fuzzing. As always, the fuzzing target and the pentest course is
 provided by PhD. Tero Karvinen @TEROKARVINEN.COM
 
