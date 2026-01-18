@@ -20,6 +20,8 @@ This project demonstrates the ability to:
 - Correlate scan behavior with application and service logs
 - Use offensive reconnaissance techniques to assess detection, logging behaviour, and exposed attack surface from a defensive perspective
 
+**Note:** All activities were performed in an isolated lab environment.
+
 ### Week 2: Sniff-n-Scan
 ====================================================================================
 
