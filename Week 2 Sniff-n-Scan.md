@@ -7,7 +7,7 @@
 *   WEEK 7: NO HASH HASH
 
 ### Week 2: Sniff-n-Scan
-========================================================================================================================
+====================================================================================
 
 The theme of this week is reconnaissance. We will continue our port scanning journey,
 and we will capture and analyze the resulting traffic. We will also learn how to discover
@@ -109,8 +109,7 @@ This was a very cool experience! We also would have completed this pretty quickl
 Pretty sweet, mission accomplished! I also learned a lot about matching and filtering - and that you should trust your ninja senses
 when fuzzing. Let's continue tomorrow with some port scanning.
 
-============================================================================================================================================
-
+========================================================================================
 
 ### X ) Port scanning basics - a summary from https://nmap.org/book/man-port-scanning-basics.html
 
@@ -143,7 +142,7 @@ before the packets reach your infrastructure. You may also need to work with you
 Logging connections with a firewall is also a thing!
 
 
-============================================================================================================================================
+=======================================================================================
 
 
 ### A little bit more about specific scanning modes:
@@ -180,8 +179,7 @@ a timeout with ICMP port unreachable reply.
 
 SOURCES: Lyon 2009: Nmap Network Scanning, Man-pages for Nmap 
 
-============================================================================================================================================
-
+================================================================================================
 ### C)  TCP connect scan
 
 ![](media/tcp_scan_1.png)
