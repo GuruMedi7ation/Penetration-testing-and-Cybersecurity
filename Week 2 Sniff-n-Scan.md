@@ -6,23 +6,23 @@
 *   WEEK 6: AAAATTACK!!!
 *   WEEK 7: NO HASH HASH
 
-Week 2: Sniff-n-Scan
-====================
+### Week 2: Sniff-n-Scan
+========================================================================================================================
 
 The theme of this week is reconnaissance. We will continue our port scanning journey,
 and we will capture and analyze the resulting traffic. We will also learn how to discover
 points of interest using a technique called fuzzing. As always, the fuzzing target and the pentest course is
 provided by PhD. Tero Karvinen @TEROKARVINEN.COM
 
-** X) + A) FUZZ FASTER U FOOLS! 
+### X) + A) FUZZ FASTER U FOOLS! 
 
 Here's a quick summary of how to use ffuf.
 
 You drive ffuf like this:
  
-'''
+```
 ffuf -w <wordlist> -u <target-url>/FUZZ
-'''
+```
 
 Fuzzing is very much an iterative process. It's a targeted brute force technique that leverages wordlists,
 mutations and smart targeting of fuzzable objects. You can fuzz URLs, headers, parameters.. 
@@ -79,9 +79,9 @@ This could be because of multiple, equally interesting reasons. All in all, you 
 Allright, let's look a little bit more of what we just got. Responses with a 154 byte size show up way too often, so let's filter them away
 and see what we've got after that. Below is the result after a second run.
 
-'''
+```
 ffuf -w common.txt -u http://127.0.0.2:8000/FUZZ -fs 154| less
-'''
+```
 
 ![](media/fs_154_hits.png)
 
@@ -109,8 +109,10 @@ This was a very cool experience! We also would have completed this pretty quickl
 Pretty sweet, mission accomplished! I also learned a lot about matching and filtering - and that you should trust your ninja senses
 when fuzzing. Let's continue tomorrow with some port scanning.
 
+============================================================================================================================================
 
-X ) Port scanning basics - a summary from https://nmap.org/book/man-port-scanning-basics.html
+
+### X ) Port scanning basics - a summary from https://nmap.org/book/man-port-scanning-basics.html
 
 What can we tell about the results of a port scan on a superficial level?
 
@@ -128,7 +130,7 @@ This is what you want from firewall, as it makes reconnaissance through port sca
 
 Additional notes:
 You can also use SPA/Port knocking to keep your ports closed - in this case you have a daemon listening to incoming
-connections and opening/closing a port only when the correct trigger is received. This is pretty cool, as it hides the target.
+connections and opening/closing a port only when the correct trigger is received. This is pretty cool, as it hides your endpoint.
 
 Firewalls offer some additional benefits, for example you can use your firewall to set up rate limiting ( sources, protocols.. )
 and filtering to reject unwanted packets ( stateless access control lists, ports, protocols ) in order to mitigate
@@ -141,7 +143,7 @@ before the packets reach your infrastructure. You may also need to work with you
 Logging connections with a firewall is also a thing!
 
 
-
+============================================================================================================================================
 
 
 ### A little bit more about specific scanning modes:
@@ -178,6 +180,8 @@ a timeout with ICMP port unreachable reply.
 
 SOURCES: Lyon 2009: Nmap Network Scanning, Man-pages for Nmap 
 
+============================================================================================================================================
+
 ### C)  TCP connect scan
 
 ![](media/tcp_scan_1.png)
@@ -200,7 +204,7 @@ the target is reachable, and there is no firewall protecting the target.
 ![](media/tcp_scan_3.png)
 
 
-** D) TCP SYN scan**
+### D) TCP SYN scan
 
 Let's move on to a TCP SYN scan.
 
@@ -216,7 +220,7 @@ This is how it looked liked in Wireshark.
 ![](media/syn_scan_2.png)
 
 
-** E) ICMP ping scan**
+### E) ICMP ping scan
 
 ![](media/ping_scan.png)
 
@@ -238,7 +242,7 @@ run nmap -sn again at our target machine. We're now seeing traffic in Wireshark 
 ![](media/ping_scan_3.png)
 
 
-** F) Nmap -pN ( No ping )**
+### F) Nmap -pN ( No ping )
 
 This time we're skipping pinging, so we assume that the target is live and proceed with the port scanning regardless if we get any replies to our ICMP messages.
 It is common that ICMP traffic is blocked, so -pN is often mandatory to get any scanning done on a real-life target.
@@ -251,7 +255,7 @@ I wonder what this was about..
 
 --late edit: Apparently this was a genuine crash!
 
-**G) Nmap -sV**
+### G) Nmap -sV
 
 Let's try version discovery! I targeted the previously discovered open TCP port 22 that has a SSH service running on it.
 
@@ -273,7 +277,7 @@ information from our target with the SSH protocol message, after which replied w
 with FIN,ACK messages being exchanged.
 
 
-**H) Nmap -oA <insert\_yourlog\_here>**
+### H) Nmap -oA <insert\_yourlog\_here>
 
 Next we're running nmap and directing the output to a log file of our choosing.
 
@@ -309,7 +313,7 @@ Packet tracing: Let's try a TCP NULL Scan with packet tracing enabled. This is a
 
 ![](media/packet_trace.png)
 
-**J) Way of the samurai: Scanning a live Apache server**
+### J) Way of the samurai: Scanning a live Apache server
 
 Let's try an aggressive scan targeting TCP port 80. I want to be intentionally noisy. I set up an Apache server on our target machine for this.
 
@@ -354,7 +358,7 @@ Our scan looked like this in Wireshark. SYN -> SYN,ACK -> RST to terminate the h
 
 ![](media/syn_wireshark.png)
 
-**K) UDP-scan: Destination unknown**
+### K) UDP-scan: Destination unknown
 
 Let's run a UDP scan on all ports.
 
