@@ -1,11 +1,7 @@
-# Week 2: Sniff-n-Scan
-                                       
-
-
-*   Week 4: Totally legit certificate!
 *   Week 1: Warm up
 *   Week 2: Sniff-n-Scan
 *   Week 3: The Lab Kid
+*   Week 4: Totally legit certificate!
 *   WEEK 5: INJECTED SEQUEL
 *   WEEK 6: AAAATTACK!!!
 *   WEEK 7: NO HASH HASH
@@ -20,7 +16,7 @@ provided by PhD. Tero Karvinen @TEROKARVINEN.COM
 
 ** X) + A) FUZZ FASTER U FOOLS! 
 
-A quick summary of how to use ffuf.
+Here's a quick summary of how to use ffuf.
 
 You drive ffuf like this:
  
@@ -37,7 +33,7 @@ status codes ). It is also very useful to filter unwanted hits with -fX flags. (
 
 By iterating filtering and matching you can narrow down your hits and discover internet gold.
 
-More about switches you can pull: https://linuxcommandlibrary.com/man/ffuf
+Source and more about switches you can pull: https://linuxcommandlibrary.com/man/ffuf
 
 Fuff is made by:
 
