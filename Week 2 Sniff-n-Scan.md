@@ -6,6 +6,11 @@
 *   WEEK 6: AAAATTACK!!!
 *   WEEK 7: NO HASH HASH
 
+# Reconnaissance & Network Scanning Lab
+**Techniques:** Fuzzing, TCP/UDP Scanning, Packet Analysis  
+**Tools:** ffuf, Nmap, Wireshark, Apache, Linux  
+**Focus:** Service discovery, stealth vs noisy scanning, traffic analysis
+
 ### Week 2: Sniff-n-Scan
 ====================================================================================
 
