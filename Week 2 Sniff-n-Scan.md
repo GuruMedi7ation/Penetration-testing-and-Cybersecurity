@@ -22,7 +22,7 @@ This project demonstrates the ability to:
 
 **Note:** All activities were performed in an isolated lab environment.
 
-### Week 2: Sniff-n-Scan
+# Week 2: Sniff-n-Scan
 ====================================================================================
 
 The theme of this week is reconnaissance. We will continue our port scanning journey,
