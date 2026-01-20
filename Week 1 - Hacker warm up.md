@@ -6,13 +6,11 @@
 *   WEEK 6: AAAATTACK!!!
 *   WEEK 7: NO HASH HASH
 
-# Short summary
+## Short summary of this week.
 
-*Techniques*: Passive reconnaissance, OSINT, Google dorking, basic SQL injection, network scanning fundamentals
-
-*Tools & Platforms*: Linux (Kali), Nmap, Google Search, PortSwigger Web Security Academy, Bandit (OverTheWire)
-
-*Focus*: Reconnaissance theory, attacker mindset, kill chain understanding, signal vs noise in early-stage discovery
+**Techniques:** Passive reconnaissance, OSINT, Google dorking, basic SQL injection, network scanning fundamentals
+**Tools & Platforms:** Linux (Kali), Nmap, Google Search, PortSwigger Web Security Academy, Bandit (OverTheWire)
+**Focus:** Reconnaissance theory, attacker mindset, kill chain understanding, signal vs noise in early-stage discovery
 
 ## Why This Matters 
 
