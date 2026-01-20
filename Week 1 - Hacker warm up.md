@@ -88,12 +88,12 @@ https://owasp.org/www-project-top-ten/ ( Top 10 vulnerabilities right now )
 https://www.exploit-db.com/ ( An archive of exploits and PoCs )
 
 
-A) First warm-up was to practice Linux skills by playing a few levels of Bandit.
+### A) First warm-up was to practice Linux skills by playing a few levels of Bandit.
 
 ![](media/bandit.png)
 
 
-B) Next, we were to solve GEN Z Challenge OSINT  Geolocate 1
+### B) Next, we were to solve GEN Z Challenge OSINT  Geolocate 1
 
 Reverse image search and a very Dutch-looking milieu made this task easy. I think I also made a google search
 on some shops that were visible in the picture. -edit: I did not save screenshots on these tasks.
@@ -109,22 +109,22 @@ I was supposed to locate the apartment from which the picture was taken on.
 to get the coordinates - I don't remember what was the issue, but I eventually moved to work on the next task.
 
 
-C) The next task was to work on some simple SQL injection on Portswigger.
+### C) The next task was to work on some simple SQL injection on Portswigger.
 
 I edited +OR+1=1 in the URL. This is what happens when there's no filtering of inputs.
 
 "https://0a09004203db05f4839b141100bc00b1.web-security-academy.net/filter?category=%27+or+1=1"
 
 
-D) The next task was to install Kali or Debian. I set up Kali for a VM.
+### D) The next task was to install Kali or Debian. I set up Kali for a VM.
 
-E) Port scanning 1000 most common ports on my localhost.
+### E) Port scanning 1000 most common ports on my localhost.
 
 ![](media/picture1.png)
 
 Host is up. All the ports are closed, and I am not running a DNS server. There's not much to tell here.
 
-F) Scanning all the ports.
+### F) Scanning all the ports.
 
 ```
 sudo nmap -p1-65535 localhost
@@ -132,7 +132,7 @@ sudo nmap -p1-65535 localhost
 
 All the ports are still closed, as I am not running any services/servers on my VM.
 
-G) An aggressive scan
+### G) An aggressive scan
 
 ```
 sudo nmap -A -p1-65535 localhost
@@ -143,14 +143,14 @@ Identifying OS was impossible, as there were no open ports to gather information
 
 -A flag is for: "Enable OS detection, version detection, script scanning, and traceroute”
 
-H) Running SSH service and scanning -A again
+### H) Running SSH service and scanning -A again
 
 I put SSH server on, nmap now recognizes the version of SSH that I'm running.
 I also notice that OS detection works now as well.
 
 Port 22 (SSH default) is open, nmap also collects the public key that I'm using.
 
-I)  OSINT / Google dorks
+### I)  OSINT / Google dorks
 
 Did you know, that you can make really sick Google searches? This is called Google dorking.
 The search engine sees and indexes an awful lot. You can get a lot of inspiration for this from exploit-DB.com.
