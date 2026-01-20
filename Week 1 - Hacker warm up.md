@@ -6,10 +6,12 @@
 *   WEEK 6: AAAATTACK!!!
 *   WEEK 7: NO HASH HASH
 
-# Week 1: Foundations
+# Short summary
 
 *Techniques*: Passive reconnaissance, OSINT, Google dorking, basic SQL injection, network scanning fundamentals
+
 *Tools & Platforms*: Linux (Kali), Nmap, Google Search, PortSwigger Web Security Academy, Bandit (OverTheWire)
+
 *Focus*: Reconnaissance theory, attacker mindset, kill chain understanding, signal vs noise in early-stage discovery
 
 ## Why This Matters 
@@ -127,17 +129,17 @@ Host is up. All the ports are closed, and I am not running a DNS server. There's
 
 F) Scanning all the ports.
 
-´´´
+```
 sudo nmap -p1-65535 localhost
-´´´
+```
 
 All the ports are still closed, as I am not running any services/servers on my VM.
 
 G) An aggressive scan
 
-´´´
+```
 sudo nmap -A -p1-65535 localhost
-´´´
+```
 
 Network distance 0 hops, which makes perfect sense when scanning localhost.
 Identifying OS was impossible, as there were no open ports to gather information from.
